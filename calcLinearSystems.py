@@ -1,9 +1,14 @@
 
+import string
+
+
 def imprimir_sistema(A, b):
     n = len(b)
+    incognitas = list(string.ascii_lowercase)  # ['a', 'b', 'c', ..., 'z']
+    
     for i in range(n):
-        linha = " + ".join(f"{A[i][j]}*x{j+1}" for j in range(n))
-        print(f"{linha} = {b[i]}")
+        linha = " + ".join(f"{A[i][j]:.0f}{incognitas[j]}" for j in range(n))
+        print(f"{linha} = {b[i]:.0f}")
     print()
 
 
@@ -87,8 +92,9 @@ def main():
     if tipo == "SPD":
         x = retro_substituicao(A, b)
         print("Solução:")
-        for i, valor in enumerate(x, start=1):
-            print(f"x{i} = {valor}")
+        incognitas = list(string.ascii_lowercase)
+        for i, valor in enumerate(x):
+            print(f"{incognitas[i]} = {valor:.0f}")
     elif tipo == "SPI":
         print("O sistema possui infinitas soluções (SPI).")
     else:
